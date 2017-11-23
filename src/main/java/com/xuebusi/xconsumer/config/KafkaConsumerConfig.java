@@ -1,15 +1,12 @@
 package com.xuebusi.xconsumer.config;
 
 import com.xuebusi.xconsumer.listener.AcknowledgingConsumerService;
-import com.xuebusi.xconsumer.listener.TestListener;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
-import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
-import org.springframework.kafka.config.KafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.listener.AbstractMessageListenerContainer;
@@ -76,25 +73,10 @@ public class KafkaConsumerConfig {
         return new DefaultKafkaConsumerFactory<>(consumerConfigs());
     }
 
-    /*@Bean
-    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, String> factory =
-                new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(consumerFactory());
-
-        return factory;
-    }*/
-
     @Bean
     public AcknowledgingConsumerService getMessageListener(){
         return new AcknowledgingConsumerService();
     }
-
-    /*@Bean
-    public TestListener listener() {
-        return new TestListener();
-    }*/
-
 
     /**
      * 消费者容器配置信息
@@ -119,13 +101,4 @@ public class KafkaConsumerConfig {
         container.setConcurrency(Integer.valueOf(concurrency));
         return container;
     }
-
-    /*@Bean
-    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, String>> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(consumerFactory());
-        factory.setConcurrency(Integer.valueOf(concurrency));
-        factory.getContainerProperties().setPollTimeout(3000);
-        return factory;
-    }*/
 }

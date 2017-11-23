@@ -5,7 +5,4 @@ package com.xuebusi.xconsumer.mapper;
  */
 public interface LogInfoMapper {
 
-
-
-
 }
