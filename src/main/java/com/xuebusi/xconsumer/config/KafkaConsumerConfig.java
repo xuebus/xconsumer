@@ -94,6 +94,10 @@ public class KafkaConsumerConfig {
         return new DefaultKafkaConsumerFactory<>(consumerConfigs());
     }
 
+    /**
+     * 消费监听器
+     * @return
+     */
     @Bean
     public AcknowledgingConsumerListener getMessageListener(){
         return new AcknowledgingConsumerListener();

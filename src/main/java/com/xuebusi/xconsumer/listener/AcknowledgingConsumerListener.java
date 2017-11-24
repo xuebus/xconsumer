@@ -25,6 +25,8 @@ public class AcknowledgingConsumerListener implements AcknowledgingMessageListen
     @Override
     public void onMessage(ConsumerRecord<String, String> record, Acknowledgment acknowledgment) {
         LOGGER.info("消费消息:{}", record.toString());
+
+        //提交offset
         acknowledgment.acknowledge();
     }
 }
