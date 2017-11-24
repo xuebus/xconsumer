@@ -12,9 +12,9 @@ import org.springframework.kafka.support.Acknowledgment;
  * 手动提交offset
  * Created by SYJ on 2017/4/1.
  */
-public class AcknowledgingConsumerService implements AcknowledgingMessageListener<String, String> {
+public class AcknowledgingConsumerListener implements AcknowledgingMessageListener<String, String> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AcknowledgingConsumerService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AcknowledgingConsumerListener.class);
 
     /**
      * 消息监听方法

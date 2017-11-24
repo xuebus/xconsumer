@@ -1,6 +1,6 @@
 package com.xuebusi.xconsumer.config;
 
-import com.xuebusi.xconsumer.listener.AcknowledgingConsumerService;
+import com.xuebusi.xconsumer.listener.AcknowledgingConsumerListener;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,27 +22,48 @@ import java.util.Map;
 @Configuration
 @EnableKafka
 public class KafkaConsumerConfig {
+    /**
+     * kafka服务器地址
+     */
     @Value("${kafka.consumer.servers}")
     private String BOOTSTRAP_SERVERS_CONFIG;
 
+    /**
+     * 消费者组名
+     */
     @Value("${kafka.consumer.group.id}")
     private String GROUP_ID_CONFIG;
 
+    /**
+     * 是否自动提交偏移量
+     */
     @Value("${kafka.consumer.enable.auto.commit}")
     private String ENABLE_AUTO_COMMIT_CONFIG;
 
     @Value("${kafka.consumer.session.timeout}")
     private String SESSION_TIMEOUT_MS_CONFIG;
 
+    /**
+     * 自动提交偏移量的间隔时间(单位毫秒)
+     */
     @Value("${kafka.consumer.auto.commit.interval}")
     private String AUTO_COMMIT_INTERVAL_MS_CONFIG;
 
+    /**
+     * 从何处开始消费
+     */
     @Value("${kafka.consumer.auto.offset.reset}")
     private String AUTO_OFFSET_RESET_CONFIG;
 
+    /**
+     * 要消费的topic
+     */
     @Value("${kafka.consumer.topic}")
     private String topic;
 
+    /**
+     * 消费者线程数
+     */
     @Value("${kafka.consumer.concurrency}")
     private String concurrency;
 
@@ -74,8 +95,8 @@ public class KafkaConsumerConfig {
     }
 
     @Bean
-    public AcknowledgingConsumerService getMessageListener(){
-        return new AcknowledgingConsumerService();
+    public AcknowledgingConsumerListener getMessageListener(){
+        return new AcknowledgingConsumerListener();
     }
 
     /**
